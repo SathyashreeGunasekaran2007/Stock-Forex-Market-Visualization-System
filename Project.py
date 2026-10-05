@@ -36,16 +36,16 @@ df["Signal"] = ""
 for i in range(1, len(df)):
     # BUY condition
     if (
-        df["EMA20"][i] > df["EMA50"][i]
-        and df["EMA20"][i - 1] <= df["EMA50"][i - 1]
+        df["EMA20"][i] > df["EMA50"].iloc[i]
+        and df["EMA20"][i - 1] <= df["EMA50"].iloc[i - 1]
         and df["RSI"][i] < 70
     ):
         df.at[df.index[i], "Signal"] = "BUY"
 
     # SELL condition
     elif (
-        df["EMA20"][i] < df["EMA50"][i]
-        and df["EMA20"][i - 1] >= df["EMA50"][i - 1]
+        df["EMA20"][i] < df["EMA50"].iloc[i]
+        and df["EMA20"][i - 1] >= df["EMA50"].iloc[i - 1]
         and df["RSI"][i] > 30
     ):
         df.at[df.index[i], "Signal"] = "SELL"
