@@ -31,22 +31,24 @@ df["RSI"] = 100 - (100 / (1 + rs))
 # -----------------------------
 # Buy / Sell Signal Logic
 # -----------------------------
+
 df["Signal"] = ""
 
 for i in range(1, len(df)):
+
     # BUY condition
     if (
-        df["EMA20"][i] > df["EMA50"].iloc[i]
-        and df["EMA20"][i - 1] <= df["EMA50"].iloc[i - 1]
-        and df["RSI"][i] < 70
+        df["EMA20"].iloc[i] > df["EMA50"].iloc[i]
+        and df["EMA20"].iloc[i - 1] <= df["EMA50"].iloc[i - 1]
+        and df["RSI"].iloc[i] < 70
     ):
         df.at[df.index[i], "Signal"] = "BUY"
 
     # SELL condition
     elif (
-        df["EMA20"][i] < df["EMA50"].iloc[i]
-        and df["EMA20"][i - 1] >= df["EMA50"].iloc[i - 1]
-        and df["RSI"][i] > 30
+        df["EMA20"].iloc[i] < df["EMA50"].iloc[i]
+        and df["EMA20"].iloc[i - 1] >= df["EMA50"].iloc[i - 1]
+        and df["RSI"].iloc[i] > 30
     ):
         df.at[df.index[i], "Signal"] = "SELL"
 
